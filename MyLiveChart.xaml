@@ -1,0 +1,67 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="MyLiveChartNamespace.MyLiveChart">
+    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="Auto,*" MinHeight="250">
+        <!-- 标题区域 -->
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#1E1E1E" Padding="5" BorderBrush="#333333" BorderThickness="0,0,0,1">
+            <TextBlock Text="{Binding ChartTitle, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       Foreground="#E0E0E0" FontWeight="Bold" HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- 左侧 Y 轴 -->
+        <Border Grid.Row="1" Grid.Column="0" Background="#252526" Width="80" ClipToBounds="True" BorderBrush="#333333" BorderThickness="0,0,1,0">
+            <Canvas Name="LeftAxisCanvas">
+                <TextBlock Text="{Binding YUnit, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                           Foreground="Cyan" FontSize="10" Canvas.Top="2" Canvas.Left="2"/>
+                <TextBlock Text="{Binding YRangeMax, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                           Foreground="Gray" FontSize="10" Canvas.Top="16" Canvas.Right="5" TextAlignment="Right" Width="70"/>
+                
+                <TextBlock Name="UpperLimitLabel" Foreground="Red" FontSize="9" Canvas.Right="5" TextAlignment="Right" Width="75" IsVisible="False"/>
+                <TextBlock Name="LowerLimitLabel" Foreground="Red" FontSize="9" Canvas.Right="5" TextAlignment="Right" Width="75" IsVisible="False"/>
+                <TextBlock Name="StandardLabel" Foreground="Lime" FontSize="9" Canvas.Right="5" TextAlignment="Right" Width="75" IsVisible="False"/>
+                
+                <TextBlock Name="AverageLabel" Foreground="Orange" FontSize="9" FontWeight="Bold" 
+                           Canvas.Right="5" TextAlignment="Right" Width="75" IsVisible="False"/>
+
+                <TextBlock Text="0" Foreground="Gray" FontSize="10" Canvas.Bottom="2" Canvas.Right="5"/>
+            </Canvas>
+        </Border>
+
+        <!-- 图表网格与曲线 -->
+        <Border Grid.Row="1" Grid.Column="1" Background="#0F0F0F" ClipToBounds="True">
+            <Canvas Name="GraphCanvas">
+                <Line Name="UpperLimitLine" Stroke="Red" StrokeThickness="1" StrokeDashArray="4,2" IsVisible="False"/>
+                <Line Name="LowerLimitLine" Stroke="Red" StrokeThickness="1" StrokeDashArray="4,2" IsVisible="False"/>
+                <Line Name="StandardLine" Stroke="Lime" StrokeThickness="1" StrokeDashArray="2,2" IsVisible="False"/>
+                
+                <Polyline Name="MainPolyline"
+                          Stroke="{Binding LineColor, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                          StrokeThickness="2"/>
+                <Line Name="AverageLine" Stroke="Orange" StrokeThickness="1" StrokeDashArray="4,2" IsVisible="False"/>
+            </Canvas>
+        </Border>
+
+        <!-- 左下角保存按钮 -->
+        <Border Grid.Row="2" Grid.Column="0" Background="#252526" BorderBrush="#333333" BorderThickness="0,1,1,0">
+             <Button Name="SaveButton" Content="SAVE DATA" FontSize="10" FontWeight="Bold"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Background="#007ACC" Foreground="White" BorderThickness="0" CornerRadius="0"
+                    Click="OnSaveButtonClick"/>
+        </Border>
+
+        <!-- 底部 X 轴 -->
+        <Border Grid.Row="2" Grid.Column="1" Height="20" Background="#252526" ClipToBounds="True" BorderBrush="#333333" BorderThickness="0,1,0,0">
+            <Grid>
+                <Canvas Name="XAxisCanvas"/>
+                <TextBlock Name="TotalCountLabel"
+                           Text="Total: 0"
+                           Foreground="#A0A0A0"
+                           FontSize="10"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Margin="0,0,10,0"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

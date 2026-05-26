@@ -1,0 +1,10 @@
+{
+  "typeNames": [
+    "MyLiveChart.MyLiveChart" // 类的完全限定名：命名空间+类名
+  ],
+  "assemblyFileNames": [
+    "MyLiveChart.dll" // 项目编译生成的程序集文件名
+  ],
+  "isSupportedInX64": true, // 支持64位系统
+  "isSupportedInX86": false // 不支持32位系统（按需调整）
+}
